@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Age calculator</title>
+    <style>
+      #box {
+        text-align: center;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        width: 40%;
+        margin: 3rem auto;
+        padding: 1% 2%;
+        font-family: "Montserrat", sans-serif;
+      }
+      h1 {
+        font-size: 40px;
+      }
+      h2 {
+        font-size: 28px;
+      }
+      h3 {
+        font-size: 20px;
+      }
+      #button {
+        display: block;
+        margin: 2% auto;
+        color: white;
+        background-color: #0980ff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 6px;
+      }
+      #button:hover {
+        cursor: pointer;
+        background-color: #0062cc;
+      }
+      #date {
+        width: 50%;
+        height: 35px;
+        border: 1px solid rgb(192, 184, 184);
+        border-radius: 5px;
+      }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="container">
+      <div id="box">
+        <h1>Age calculator</h1>
+        <h3>Enter your date of birth</h3>
+        <input type="date" id="bday" />
+        <button id="button">Calculate Age</button>
+        <h2>
+          Your age is <span id="ans">X</span> <span id="plural">years</span> old
+        </h2>
+        <p id="joke"></p>
+      </div>
+    </div>
+    <script>
+      let dob = document.getElementById("bday");
+      let btn = document.getElementById("button");
+      let ageP = document.getElementById("ans");
+      let joke = document.getElementById("joke");
+      let plr = document.getElementById("plural");
+      btn.addEventListener("click", () => {
+        let num = dob.value;
+        if (num === "") {
+          alert("Enter a valid date");
+        }
+        let age = ageValue(num);
+        ageP.innerText = age;
+        if (age < 2) plr.innerText = `year`;
+        if (age <= 6) {
+          joke.innerText = `Go take a nap 👶`;
+        } else if (age <= 16) {
+          joke.innerText = `Stay away from mobile 🤳`;
+        } else if (age <= 24) {
+          joke.innerText = `You'll get old soon 👨‍🦳`;
+        } else if (age <= 40) {
+          joke.innerText = `why are you still alive??? 👴`;
+        } else {
+          joke.innerText = `You are practically dead ☠️`;
+        }
+      });
+      function ageValue(ele) {
+        let now = new Date();
+        let cakeDay = new Date(ele);
+        let ans = now.getFullYear() - cakeDay.getFullYear();
+        let mon = now.getMonth() - cakeDay.getMonth();
+        // console.log(now.getMonth(), cakeDay.getMonth());
+        if (mon <= 0 && ans !== 0) ans--;
+        return ans;
+      }
+    </script>
+  </body>
+</html>
